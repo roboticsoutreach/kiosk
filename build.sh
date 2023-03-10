@@ -1,8 +1,7 @@
 #!/bin/bash
 
 SROBO_NAME="Student Robotics OS"
-# SROBO_VERSION="$(git describe --tags)"
-SROBO_VERSION="20-21"
+SROBO_VERSION="$(git describe --tags)"
 
 docker run --rm --privileged \
     -v /dev:/dev \
