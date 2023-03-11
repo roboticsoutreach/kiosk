@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu -o pipefail
 
-user="robot"
+user="pi"
 password="$(openssl passwd -crypt -salt robot robot)"
 
 userdel -r pi
@@ -15,14 +15,10 @@ useradd \
     -p "$password" \
     $user
 
-mv /etc/sudoers.d/010_pi-nopasswd /etc/sudoers.d/010_robot-nopasswd
-sed -i 's/pi/robot/g' /etc/sudoers.d/010_robot-nopasswd
+mv /etc/sudoers.d/010_pi-nopasswd /etc/sudoers.d/011_$user-nopasswd
+sed -i "s/pi/$user/g" /etc/sudoers.d/011_$user-nopasswd
 
 echo "$user:$password" > /boot/userconf
 
 # Enable ssh
 touch /boot/ssh
-
-# profile.d
-mv /tmp/packer/user/srobo.sh /etc/profile.d/
-chmod 755 /etc/profile.d/srobo.sh

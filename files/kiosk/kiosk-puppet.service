@@ -1,0 +1,13 @@
+[Unit]
+Description=Update kiosk from puppet
+Requires=network.target
+After=multi-user.target
+
+[Service]
+WorkingDirectory=/home/pi/srcomp-kiosk
+ExecStart=/home/pi/srcomp-kiosk/scripts/update
+User=root
+Type=oneshot
+
+[Install]
+WantedBy=graphical.target

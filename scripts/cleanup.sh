@@ -1,7 +1,5 @@
 #!/bin/bash
-set -eu -o pipefail
+set -eux -o pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y clean
-
-pip3 cache purge

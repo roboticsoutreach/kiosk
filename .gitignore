@@ -1,2 +1,2 @@
-output.img.xz
+*.img.xz
 .packer_cache/
