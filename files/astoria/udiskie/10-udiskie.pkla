@@ -1,4 +1,0 @@
-[udisks2]
-Identity=unix-user:robot
-Action=org.freedesktop.udisks2.filesystem-mount-other-seat;org.freedesktop.udisks2.filesystem-mount
-ResultAny=yes
