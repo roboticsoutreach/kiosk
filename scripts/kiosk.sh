@@ -37,3 +37,8 @@ EOF
 mv /tmp/packer/kiosk/kiosk-puppet.service /usr/lib/systemd/system/
 chmod 644 /usr/lib/systemd/system/kiosk-puppet.service
 systemctl enable kiosk-puppet.service
+
+# Bodge to get puppet to run without a matching MAC address
+if ! grep remote_ssh_port $home_dir/srcomp-kiosk/hieradata/common.yaml > /dev/null; then
+    echo 'remote_ssh_port: 2222' >> $home_dir/srcomp-kiosk/hieradata/common.yaml
+fi
