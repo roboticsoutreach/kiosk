@@ -6,8 +6,10 @@ After=multi-user.target
 [Service]
 WorkingDirectory=/home/pi/srcomp-kiosk
 ExecStart=/home/pi/srcomp-kiosk/scripts/update
-User=root
+User=pi
 Type=oneshot
+Restart=on-failure
+RestartSec=5
 
 [Install]
 WantedBy=graphical.target

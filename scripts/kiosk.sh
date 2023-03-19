@@ -38,6 +38,14 @@ mv /tmp/packer/kiosk/kiosk-puppet.service /usr/lib/systemd/system/
 chmod 644 /usr/lib/systemd/system/kiosk-puppet.service
 systemctl enable kiosk-puppet.service
 
+# remove "Welcome to Raspberry Pi"
+rm /etc/xdg/autostart/piwiz.desktop
+
+# Disable screen blanking
+mkdir -p /etc/X11/xorg.conf.d/
+mv /tmp/packer/kiosk/10-blanking.conf /etc/X11/xorg.conf.d/10-blanking.conf
+chmod 644 /etc/X11/xorg.conf.d/10-blanking.conf
+
 # Bodge to get puppet to run without a matching MAC address
 if ! grep remote_ssh_port $home_dir/srcomp-kiosk/hieradata/common.yaml > /dev/null; then
     echo 'remote_ssh_port: 2222' >> $home_dir/srcomp-kiosk/hieradata/common.yaml
