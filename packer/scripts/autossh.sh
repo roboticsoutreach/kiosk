@@ -1,17 +1,15 @@
 #!/bin/bash
 set -eux -o pipefail
 
+# At runtime, autossh will need to run ssh-keyscan to get the remote host's
+# public key and be given an ssh private key at /home/autossh/.ssh/autossh.key
+
 # create autossh user
 useradd -m -s /usr/sbin/nologin autossh
 
 # create ssh key for autossh
 mkdir -p /home/autossh/.ssh
 chmod 700 /home/autossh/.ssh
-
-# Create ssh key for tunnel user
-/usr/bin/ssh-keygen -t ed25519 -f /home/autossh/.ssh/id_ed25519 -N ''
-
-# TODO populate known_hosts with compbox host key
 
 # install and config autossh
 apt-get -y install autossh

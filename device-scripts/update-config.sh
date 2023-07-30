@@ -110,6 +110,17 @@ else
         systemctl disable autossh
         systemctl stop autossh
     else
+        # if autossh_host is not in known_hosts, get its host key
+        if ! grep -q "$autossh_host" /home/autossh/.ssh/known_hosts; then
+            ssh-keyscan "$autossh_host" >> /home/autossh/.ssh/known_hosts
+        fi
+        # If /boot/autossh.key exists, move it to /home/autossh/.ssh/autossh.key
+        if [ -f /boot/autossh.key ]; then
+            mkdir -p /home/autossh/.ssh
+            mv /boot/autossh.key /home/autossh/.ssh/autossh.key
+            chown autossh:autossh /home/autossh/.ssh/autossh.key
+            chmod 600 /home/autossh/.ssh/autossh.key
+        fi
         echo "autossh enabled"
         # update autossh config
         cat > /etc/autossh.conf << EOF

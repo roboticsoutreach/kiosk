@@ -16,7 +16,7 @@ GLOBAL_CONFIG_FILE = REPO_ROOT / "global_config.json"
 GENERATED_CONFIG_FILE = REPO_ROOT / "generated/pi-ssh-config"
 GENERATED_NAMES_FILE = REPO_ROOT / "generated/pi-names"
 
-AUTOSSH_USER = "pi"
+REMOTE_SSH_USER = "pi"
 DOMAIN = "sr.lan"
 
 
@@ -42,7 +42,7 @@ def main():
             "    ProxyJump autossh_host\n\n",
             "Host autossh_host\n",
             f"    HostName {global_config['autossh_host']}\n",
-            f"    User {AUTOSSH_USER}\n\n",
+            f"    User {REMOTE_SSH_USER}\n\n",
         ])
 
         csv_reader = csv.DictReader(f)

@@ -9,7 +9,7 @@ Type=simple
 Restart=on-failure
 Environment="AUTOSSH_GATETIME=0"
 EnvironmentFile=/etc/autossh.conf
-ExecStart=/usr/bin/autossh -M 0 -o 'ServerAliveInterval 30' -o 'ExitOnForwardFailure yes' -N -R ${remote_ssh_port}:localhost:22 -i /home/autossh/.ssh/id_ed25519 autossh@${tunnel_host}
+ExecStart=/usr/bin/autossh -M 0 -o 'ServerAliveInterval 30' -o 'ExitOnForwardFailure yes' -N -R ${remote_ssh_port}:localhost:22 -i /home/autossh/.ssh/autossh.key autossh@${tunnel_host}
 
 [Install]
 WantedBy=multi-user.target
