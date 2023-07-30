@@ -1,4 +1,7 @@
 {
+    "variables": {
+      "GIT_VERSION": ""
+    },
     "builders": [{
       "type": "arm",
       "file_urls" : ["https://downloads.raspberrypi.org/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2023-02-22/2023-02-21-raspios-buster-armhf.img.xz"],
@@ -7,7 +10,7 @@
       "file_unarchive_cmd": ["xz", "--decompress", "$ARCHIVE_PATH"],
       "file_target_extension": "xz",
       "image_build_method": "resize",
-      "image_path": "output.img",
+      "image_path": "kiosk-{{user `GIT_VERSION`}}.img",
       "image_size": "6G",
       "image_type": "dos",
       "image_partitions": [
@@ -40,10 +43,14 @@
       },
       {
         "type": "shell",
+        "environment_vars": [
+          "DEBIAN_FRONTEND=noninteractive"
+        ],
         "scripts": [
           "scripts/user.sh",
           "scripts/base.sh",
           "scripts/kiosk.sh",
+          "scripts/autossh.sh",
           "scripts/cleanup.sh"
         ]
       }
@@ -51,7 +58,7 @@
     "post-processors": [
       {
         "type": "shell-local",
-        "inline": ["xz -vT0 output.img"]
+        "inline": ["xz -vT0 kiosk-{{user `GIT_VERSION`}}.img"]
       }
     ]
   }

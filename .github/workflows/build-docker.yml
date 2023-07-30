@@ -27,10 +27,17 @@ jobs:
         run: |
           chmod +x ./build.sh
           ./build.sh
-          du -h output.img.xz
+          du -h ${{ github.workspace }}/*.img.xz
+
+      - name: Get output name
+        id: git-desc
+        run: |
+          echo "git_desc=$(git describe --tags --always)" >> $GITHUB_ENV
+          echo "image_path=$(realpath ${{ github.workspace }}/*.img.xz)" >> $GITHUB_ENV
+          echo "image_name=$(basename ${{ github.workspace }}/*.img.xz)" >> $GITHUB_ENV
 
       - name: Save image artifact
         uses: actions/upload-artifact@v3
         with:
-          name: image
-          path: output.img.xz
+          name: kiosk-${{ env.git_desc }}
+          path: ${{ env.image_path }}

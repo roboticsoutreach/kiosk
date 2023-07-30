@@ -1,0 +1,18 @@
+[Unit]
+Description="A fullscreen chromium browser in kiosk mode."
+# TODO bind to kiosk-puppet.service
+PartOf=graphical.target
+After=kiosk-update.service
+
+[Service]
+User=pi
+
+Type=simple
+Restart=always
+Environment="DISPLAY=:0"
+EnvironmentFile=/home/pi/sb-kiosk.conf
+
+ExecStart=/usr/bin/chromium-browser $kiosk_args "${kiosk_url}"
+
+[Install]
+WantedBy=graphical.target

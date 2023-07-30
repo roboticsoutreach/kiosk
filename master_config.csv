@@ -1,0 +1,4 @@
+device,hostname,url,autossh_port
+default,kiosk,"file:///home/pi/mac.html",0
+12:34:56:78:90:ab,corner1,"venue/arena?main,0",1234
+12:34:56:78:90:ac,outside,"livestream",1235
