@@ -1,5 +1,5 @@
 {
-    "compbox_ip": "192.168.88.2",
+    "compbox_ip": "192.168.10.1",
     "autossh_host": "localhost",
     "venue_compbox": "compbox.srobo",
     "public_compbox": "compbox.srobo",
