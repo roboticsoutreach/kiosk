@@ -1,0 +1,26 @@
+#!/bin/bash -e
+# Ping the given pi or all pis to see if they are online
+# Usage: update.sh  [<pi-name>]
+script_dir="$(dirname -- "$( readlink -f -- "$0")")"
+pi_list="$script_dir/../generated/pi-names"
+
+$script_dir/validate || exit 1
+
+
+if [ "$1" == "" ]; then
+    while read -r pi_name; do
+        ping -c 1 -q -W2 "$pi_name" > /dev/null
+        if [ $? -eq 0 ]; then
+            printf "%-17s is up\n" "$pi_name"
+        else
+            printf "%-17s is down\n" "$pi_name"
+        fi
+    done < "$pi_list"
+else
+    ping -c 1 -q -W2 $1 > /dev/null
+    if [ $? -eq 0 ]; then
+        printf "%-17s is up" "$1"
+    else
+        printf "%-17s is up" "$1"
+    fi
+fi

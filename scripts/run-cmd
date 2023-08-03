@@ -1,0 +1,29 @@
+#!/bin/bash -e
+# Run the given command on all pis
+# Usage: run-cmd [--remote] [command]
+# Example: run-cmd "echo hello world"
+script_dir="$(dirname -- "$( readlink -f -- "$0")")"
+pi_list="$script_dir/../generated/pi-names"
+
+remote=false
+
+if [ "$1" == "--remote" ]; then
+    shift
+    remote=true
+    ssh_config="$script_dir/../generated/pi-ssh-config"
+    ssh_hosts="$(grep -E 'Host [^*]' "$ssh_config" | cut -d' ' -f2)"
+fi
+
+while read -r pi_name; do
+    echo "Running command on $pi_name"
+    if $remote; then
+        # Check if we have an autossh tunnel to this pi
+        if echo "$ssh_hosts" | grep -q "$pi_name.remote"; then
+            $script_dir/kiosk-ssh "${pi_name}.remote" "$@" < /dev/null || true
+        else
+            echo "Skipping $pi_name, no autossh tunnel"
+        fi
+    else
+        $script_dir/kiosk-ssh "${pi_name}" "$@" < /dev/null || true
+    fi
+done < $pi_list
