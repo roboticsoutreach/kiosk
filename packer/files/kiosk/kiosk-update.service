@@ -5,7 +5,7 @@ After=multi-user.target
 
 [Service]
 WorkingDirectory=/home/pi/sb-kiosk
-ExecStart=/home/pi/sb-kiosk/scripts/update-config.sh
+ExecStart=/home/pi/sb-kiosk/device-scripts/update-config.sh
 Type=oneshot
 User=pi
 

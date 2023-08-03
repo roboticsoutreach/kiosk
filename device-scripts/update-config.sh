@@ -24,7 +24,7 @@ git pull || true
 
 # get config for this device
 our_mac=$(cat /sys/class/net/eth0/address)
-./scripts/generate-device-config.py --device "$our_mac" --output /tmp/raw_config.env
+./device-scripts/generate-device-config.py --device "$our_mac" --output /tmp/raw_config.env
 # Sets new_hostname, new_kiosk_url, autossh_port, autossh_host, compbox_ip, compbox_host
 source /tmp/raw_config.env
 
