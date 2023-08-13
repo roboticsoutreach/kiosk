@@ -5,6 +5,9 @@ export DEBIAN_FRONTEND=noninteractive
 
 home_dir='/home/pi'
 
+# Set up journald to use persistent storage
+echo "Storage=persistent" >> /etc/systemd/journald.conf
+
 # Package install
 apt-get -y install \
     puppet \
