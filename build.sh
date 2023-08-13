@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ $1 == "fast" ]; then
+    SKIP_COMPRESSION="true"
+else
+    SKIP_COMPRESSION="false"
+fi
 
 GIT_VERSION="$(git describe --tags --always)"
 
@@ -11,6 +16,7 @@ docker run --rm --privileged \
     mkaczanowski/packer-builder-arm:latest \
     build \
     -var "GIT_VERSION=${GIT_VERSION}" \
+    -var "SKIP_COMPRESSION=${SKIP_COMPRESSION}" \
     pi.json
 
 if [ $? -ne 0 ]; then
@@ -19,4 +25,4 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-mv packer/kiosk-*.img.xz ./
+mv packer/kiosk-*.img* ./
