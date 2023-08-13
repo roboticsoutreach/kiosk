@@ -10,7 +10,6 @@ echo "Storage=persistent" >> /etc/systemd/journald.conf
 
 # Package install
 apt-get -y install \
-    puppet \
     git \
     unclutter \
     x11-xserver-utils \
