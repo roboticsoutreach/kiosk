@@ -31,7 +31,7 @@ chmod +x $home_dir/show-procs
 echo 'export DISPLAY=:0' >> $home_dir/.bashrc
 
 # Clone the kiosk repository into the image to allow fetching config at boot
-git clone https://github.com/WillB97/sb-kiosk.git sb-kiosk
+git clone --branch "${KIOSK_BRANCH:-main}" https://github.com/WillB97/sb-kiosk.git sb-kiosk
 
 chown 1000:1000 -R $home_dir/sb-kiosk
 
@@ -56,6 +56,16 @@ chmod 644 /etc/X11/xorg.conf.d/10-blanking.conf
 
 # Remove undervoltage warnings
 apt-get -y remove lxplug-ptbatt
+cat >> /boot/config.txt << EOF
+# Disable under-voltage warning
+avoid_warnings=1
+EOF
+
+# Enable underscan compensation
+cat >> /boot/config.txt << EOF
+# Enable underscan compensation
+disable_overscan=1
+EOF
 
 # setup ntp w/ timesyncd
 compbox_host=$(cat $home_dir/sb-kiosk/global_config.json| python3 -c 'import json,sys;print(json.load(sys.stdin)["public_compbox"])')

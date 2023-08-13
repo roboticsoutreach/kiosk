@@ -17,6 +17,7 @@ docker run --rm --privileged \
     build \
     -var "GIT_VERSION=${GIT_VERSION}" \
     -var "SKIP_COMPRESSION=${SKIP_COMPRESSION}" \
+    -var "KIOSK_BRANCH=${KIOSK_BRANCH:-main}" \
     pi.json
 
 if [ $? -ne 0 ]; then

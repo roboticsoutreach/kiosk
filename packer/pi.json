@@ -1,7 +1,8 @@
 {
     "variables": {
       "GIT_VERSION": "",
-      "SKIP_COMPRESSION": "false"
+      "SKIP_COMPRESSION": "false",
+      "KIOSK_BRANCH": "main"
     },
     "builders": [{
       "type": "arm",
@@ -45,7 +46,8 @@
       {
         "type": "shell",
         "environment_vars": [
-          "DEBIAN_FRONTEND=noninteractive"
+          "DEBIAN_FRONTEND=noninteractive",
+          "KIOSK_BRANCH={{user `KIOSK_BRANCH`}}"
         ],
         "scripts": [
           "scripts/user.sh",
