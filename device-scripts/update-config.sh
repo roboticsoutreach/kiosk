@@ -77,13 +77,11 @@ if [ "$kiosk_url" == "$new_kiosk_url" ]; then
     echo "kiosk_url unchanged"
 else
     # calculate kiosk_args
-    uname -m | grep -q armv7  # check if pi is newer than pi 2
-    newer_pi=$?
     base_kiosk_args="--incognito --kiosk --enable-kiosk-mode --enabled"
     base_kiosk_opts="--no-sandbox --disable-smooth-scrolling --disable-java --disable-restore-session-state --disable-sync --disable-translate"
     low_power_kiosk_args="--disable-low-res-tiling --enable-low-end-device-mode --disable-composited-antialiasing --disk-cache-size=1 --media-cache-size=1"
 
-    if $newer_pi; then
+    if uname -m | grep -q armv7; then  # check if pi is newer than pi 2
         new_kiosk_args="$base_kiosk_args $base_kiosk_opts"
     else
         new_kiosk_args="$base_kiosk_args $base_kiosk_opts $low_power_kiosk_args"
