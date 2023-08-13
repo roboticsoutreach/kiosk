@@ -13,14 +13,16 @@ fi
 
 cd /home/pi/sb-kiosk
 
-for i in $(seq 1 45); do
+sudo -u pi -n bash -x << EOF
+for i in \$(seq 1 45); do
     # try to git fetch
-    sudo -u pi git fetch && break
+    git fetch && break
     sleep 1
 done
 
 # try to git pull
-sudo -u pi git pull || true
+git pull || true
+EOF
 
 # get config for this device
 our_mac=$(cat /sys/class/net/eth0/address)
