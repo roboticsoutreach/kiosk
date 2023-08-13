@@ -47,6 +47,11 @@ if [ "$prev_compbox" != "$compbox_ip" ]; then
     sed -i "s/^.*# srcomp-auto/$compbox_ip $compbox_host  # srcomp-auto/" /etc/hosts
 fi
 
+# unlock chromium profile
+if [ -L /home/pi/.config/chromium/SingletonLock ]; then
+    rm -rf /home/pi/.config/chromium/Singleton*
+fi
+
 # generate html page with mac address and local ip address
 cat > /home/pi/mac.html << EOF
 <!DOCTYPE html>
