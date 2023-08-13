@@ -1,5 +1,5 @@
 [Unit]
-Description=Update kiosk from puppet
+Description=Update kiosk from git
 Requires=network.target
 After=multi-user.target
 
@@ -7,7 +7,6 @@ After=multi-user.target
 WorkingDirectory=/home/pi/sb-kiosk
 ExecStart=/home/pi/sb-kiosk/device-scripts/update-config.sh
 Type=oneshot
-User=pi
 
 [Install]
 WantedBy=graphical.target
