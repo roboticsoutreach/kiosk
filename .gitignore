@@ -1,4 +1,2 @@
-*.img.xz
+*.img*
 .packer_cache/
-
-kiosk-*.img
