@@ -1,6 +1,5 @@
 [Unit]
 Description="A fullscreen chromium browser in kiosk mode."
-# TODO bind to kiosk-puppet.service
 PartOf=graphical.target
 After=kiosk-update.service
 

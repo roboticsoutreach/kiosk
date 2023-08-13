@@ -71,9 +71,9 @@ kiosk_url="file:///dev/null"
 EOF
 
 # setup systemd service to run the kiosk
-mv /tmp/packer/kiosk/srcomp-kiosk.service /usr/lib/systemd/system/
-chmod 644 /usr/lib/systemd/system/srcomp-kiosk.service
-systemctl enable srcomp-kiosk.service
+mv /tmp/packer/kiosk/kiosk-browser.service /usr/lib/systemd/system/
+chmod 644 /usr/lib/systemd/system/kiosk-browser.service
+systemctl enable kiosk-browser.service
 
 # add venue compbox to /etc/hosts
 cat $home_dir/sb-kiosk/global_config.json| python3 -c '

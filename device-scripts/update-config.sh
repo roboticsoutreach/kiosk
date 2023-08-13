@@ -93,9 +93,9 @@ kiosk_args="$new_kiosk_args"
 kiosk_url="$new_kiosk_url"
 EOF
     # restart kiosk service
-    if systemctl is-active --quiet srcomp-kiosk; then
+    if systemctl is-active --quiet kiosk-browser; then
         # avoid the deadlock if this service is waiting for kiosk-update to finish
-        systemctl restart srcomp-kiosk
+        systemctl restart kiosk-browser
     fi
 fi
 
