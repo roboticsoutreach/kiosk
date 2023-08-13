@@ -102,7 +102,7 @@ EOF
     # restart kiosk service
     if systemctl is-active --quiet kiosk-browser; then
         # avoid the deadlock if this service is waiting for kiosk-update to finish
-        systemctl restart kiosk-browser
+        systemctl restart --no-block kiosk-browser
     fi
 fi
 
@@ -137,6 +137,6 @@ EOF
 
         # restart autossh service
         systemctl enable autossh
-        systemctl restart autossh
+        systemctl restart --no-block autossh
     fi
 fi
