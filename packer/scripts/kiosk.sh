@@ -28,20 +28,20 @@ chmod +x $home_dir/show-procs
 echo 'export DISPLAY=:0' >> $home_dir/.bashrc
 
 # Clone the kiosk repository into the image to allow fetching config at boot
-git clone https://github.com/WillB97/sb-kiosk.git srcomp-kiosk
+git clone https://github.com/WillB97/sb-kiosk.git sb-kiosk
 
-chown 1000:1000 -R $home_dir/srcomp-kiosk
+chown 1000:1000 -R $home_dir/sb-kiosk
 
 # Allow git to be used in the repository as root
 cat > /root/.gitconfig << EOF
 [safe]
-	directory = /home/pi/srcomp-kiosk
+	directory = /home/pi/sb-kiosk
 EOF
 
-# Run puppet config at boot
-mv /tmp/packer/kiosk/kiosk-puppet.service /usr/lib/systemd/system/
-chmod 644 /usr/lib/systemd/system/kiosk-puppet.service
-systemctl enable kiosk-puppet.service
+# Update the config at boot
+mv /tmp/packer/kiosk/kiosk-update.service /usr/lib/systemd/system/
+chmod 644 /usr/lib/systemd/system/kiosk-update.service
+systemctl enable kiosk-update.service
 
 # remove "Welcome to Raspberry Pi"
 rm /etc/xdg/autostart/piwiz.desktop
@@ -55,7 +55,7 @@ chmod 644 /etc/X11/xorg.conf.d/10-blanking.conf
 apt-get -y remove lxplug-ptbatt
 
 # setup ntp w/ timesyncd
-compbox_host=$(cat $home_dir/srcomp-kiosk/global_config.json| python3 -c 'import json,sys;print(json.load(sys.stdin)["public_compbox"])')
+compbox_host=$(cat $home_dir/sb-kiosk/global_config.json| python3 -c 'import json,sys;print(json.load(sys.stdin)["public_compbox"])')
 sed -i "s/^#\?NTP=.*/NTP=$compbox_host/" /etc/systemd/timesyncd.conf
 
 # set timezone
@@ -73,7 +73,7 @@ chmod 644 /usr/lib/systemd/system/srcomp-kiosk.service
 systemctl enable srcomp-kiosk.service
 
 # add venue compbox to /etc/hosts
-cat $home_dir/srcomp-kiosk/global_config.json| python3 -c '
+cat $home_dir/sb-kiosk/global_config.json| python3 -c '
 import json,sys
 data=json.load(sys.stdin)
 print(data["compbox_ip"], data["venue_compbox"], " # srcomp-auto")

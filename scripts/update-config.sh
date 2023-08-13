@@ -6,8 +6,8 @@ if [ "$(id -u)" != "0" ]; then
     exec sudo "$0" "$@"
 fi
 
-if [ ! -d /home/pi/srcomp-kiosk ]; then
-    echo "srcomp-kiosk not found, exiting"
+if [ ! -d /home/pi/sb-kiosk ]; then
+    echo "sb-kiosk not found, exiting"
     exit 1
 fi
 
