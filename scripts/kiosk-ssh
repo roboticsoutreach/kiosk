@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # SSH into a kiosk pi using the generated ssh config file
-# Usage: kiosk-ssh [ssh args]
-# Example: kiosk-ssh "echo hello world"
+# Usage: kiosk-ssh <pi-name> [ssh args]
+# Example: kiosk-ssh test-kiosk "echo hello world"
 script_dir="$(dirname -- "$( readlink -f -- "$0")")"
 config_file="$script_dir/../generated/pi-ssh-config"
 
