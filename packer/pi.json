@@ -63,7 +63,7 @@
         "type": "shell-local",
         "inline": [
           "if [ \"{{user `SKIP_COMPRESSION`}}\" != \"true\" ]; then",
-          "xz -vT0 kiosk-{{user `GIT_VERSION`}}.img",
+          "xz -vT0 kiosk-{{user `KIOSK_BRANCH`}}-{{user `GIT_VERSION`}}.img",
           "fi"
         ]
       }

@@ -6,6 +6,8 @@ else
 fi
 
 GIT_VERSION="$(git describe --tags --always)"
+# default KIOSK_BRANCH to to current branch
+KIOSK_BRANCH="${KIOSK_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}"
 
 rm -f kiosk-*.img.xz
 rm -f kiosk-*.img
