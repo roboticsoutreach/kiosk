@@ -27,7 +27,7 @@ EOF
 # get config for this device
 our_mac=$(cat /sys/class/net/eth0/address)
 ./device-scripts/generate-device-config.py --device "$our_mac" --output /tmp/raw_config.env
-# Sets new_hostname, new_kiosk_url, autossh_port, autossh_host, compbox_ip, compbox_host
+# Sets new_hostname, new_kiosk_url, autossh_port, autossh_host, compbox_ip, compbox_host, public_compbox, ntp_server
 source /tmp/raw_config.env
 
 # update hostname & refresh dhcp hostname
@@ -39,7 +39,19 @@ if [ "$old_hostname" != "$new_hostname" ]; then
     systemctl restart dhcpcd
 fi
 
-# TODO set ntp server to venue/public compbox
+# set ntp server to venue/public compbox
+if [ "$ntp_server" == "public" ]; then
+    ntp_server_addr=$public_compbox
+elif [ "$ntp_server" == "venue" ]; then
+    ntp_server_addr=$compbox_ip
+fi
+
+current_ntp_server=$(awk '/^NTP=/{print $2}' /etc/systemd/timesyncd.conf)
+if [ -n "$ntp_server_addr" ] && [ "$current_ntp_server" != "$ntp_server_addr" ]; then
+    sed -i "s/^#\?NTP=.*/NTP=$ntp_server_addr/" /etc/systemd/timesyncd.conf
+    systemctl restart --no-block systemd-timesyncd
+fi
+
 
 # update venue compbox in /etc/hosts
 prev_compbox=$(awk "/$compbox_host/{print \$1}" /etc/hosts)
@@ -47,7 +59,7 @@ if [ "$prev_compbox" != "$compbox_ip" ]; then
     sed -i "s/^.*# srcomp-auto/$compbox_ip $compbox_host  # srcomp-auto/" /etc/hosts
 fi
 
-# unlock chromium profile
+# unlock chromium profile, if chromium closed uncleanly this lock file will prevent it from starting
 if [ -L /home/pi/.config/chromium/SingletonLock ]; then
     rm -rf /home/pi/.config/chromium/Singleton*
 fi

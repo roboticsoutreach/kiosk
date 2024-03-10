@@ -1,5 +1,5 @@
-device,hostname,url,autossh_port
-default,kiosk,"file:///home/pi/mac.html",0
-12:34:56:78:90:ab,corner1,"venue/arena.html?main,0",1234
-12:34:56:78:90:ac,outside,"livestream",1235
-b8:27:eb:c1:bb:42,test-kiosk,"file:///home/pi/mac.html",0
+device,hostname,url,autossh_port,ntp_server
+default,kiosk,"file:///home/pi/mac.html",0,venue
+12:34:56:78:90:ab,corner1,"venue/arena.html?main,0",1234,venue
+12:34:56:78:90:ac,outside,"livestream",1235,public
+b8:27:eb:c1:bb:42,test-kiosk,"file:///home/pi/mac.html",0,venue

@@ -69,10 +69,6 @@ EOF
 # disable password ssh login
 sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config
 
-# setup ntp w/ timesyncd
-compbox_host=$(cat $home_dir/sb-kiosk/global_config.json| python3 -c 'import json,sys;print(json.load(sys.stdin)["public_compbox"])')
-sed -i "s/^#\?NTP=.*/NTP=$compbox_host/" /etc/systemd/timesyncd.conf
-
 # set timezone
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 

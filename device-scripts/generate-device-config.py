@@ -18,7 +18,7 @@ def generate_config(device, output):
         for row in csv_reader:
             all_configs[row['device'].lower()] = row
 
-    if device not in all_configs:
+    if device.lower() not in all_configs:
         device = 'default'
 
     with open(output, 'w') as f:
@@ -40,12 +40,16 @@ def generate_config(device, output):
                 url = f"{alias_url}/{url_args}"
                 break
 
-        f.write(f"new_hostname={config['hostname']}\n")
-        f.write(f"new_kiosk_url={url}\n")
-        f.write(f"autossh_port={config['autossh_port']}\n")
-        f.write(f"autossh_host={global_config['autossh_host']}\n")
-        f.write(f"compbox_ip={global_config['compbox_ip']}\n")
-        f.write(f"compbox_host={global_config['venue_compbox']}\n")
+        f.writelines([
+            f"new_hostname={config['hostname']}\n",
+            f"new_kiosk_url={url}\n",
+            f"autossh_port={config['autossh_port']}\n",
+            f"ntp_server={config['ntp_server']}\n",
+            f"autossh_host={global_config['autossh_host']}\n",
+            f"compbox_ip={global_config['compbox_ip']}\n",
+            f"compbox_host={global_config['venue_compbox']}\n",
+            f"public_compbox={global_config['public_compbox']}\n",
+        ])
 
 
 def main():
