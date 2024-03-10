@@ -1,8 +1,7 @@
 name: Image build
 on:
   push:
-    branches:
-    - main
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.ref }}
