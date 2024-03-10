@@ -77,20 +77,41 @@ if [ "$kiosk_url" == "$new_kiosk_url" ]; then
     echo "kiosk_url unchanged"
 else
     # calculate kiosk_args
-    base_kiosk_args="--incognito --kiosk --enable-kiosk-mode --enabled"
-    base_kiosk_opts="--no-sandbox --disable-smooth-scrolling --disable-java --disable-restore-session-state --disable-sync --disable-translate"
-    low_power_kiosk_args="--disable-low-res-tiling --enable-low-end-device-mode --disable-composited-antialiasing --disk-cache-size=1 --media-cache-size=1"
+    base_kiosk_args="
+        --incognito
+        --kiosk
+        --enable-kiosk-mode
+        --enabled
+        --no-sandbox
+        --disable-smooth-scrolling
+        --disable-java
+        --disable-restore-session-state
+        --disable-sync
+        --disable-translate"
+    low_power_kiosk_args="
+        --disable-low-res-tiling
+        --enable-low-end-device-mode
+        --disable-composited-antialiasing
+        --disk-cache-size=1
+        --media-cache-size=1"
 
     if uname -m | grep -q armv7; then  # check if pi is newer than pi 2
-        new_kiosk_args="$base_kiosk_args $base_kiosk_opts"
+        new_kiosk_args="$base_kiosk_args"
     else
-        new_kiosk_args="$base_kiosk_args $base_kiosk_opts $low_power_kiosk_args"
+        new_kiosk_args="$base_kiosk_args $low_power_kiosk_args"
     fi
 
     if echo "$new_kiosk_url" | grep -q "youtube"; then
         # livestream options
-        new_kiosk_args="--kiosk --no-user-gesture-required --start-fullscreen --autoplay-policy=no-user-gesture-required"
+        new_kiosk_args="
+            --kiosk
+            --no-user-gesture-required
+            --start-fullscreen
+            --autoplay-policy=no-user-gesture-required"
     fi
+
+    # reformat args to a single line
+    new_kiosk_args="$(echo $new_kiosk_args)"
 
     # update kiosk url and args (write to /home/pi/sb-kiosk.conf)
     cat > /home/pi/sb-kiosk.conf << EOF
