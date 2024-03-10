@@ -50,8 +50,8 @@
           "KIOSK_BRANCH={{user `KIOSK_BRANCH`}}"
         ],
         "scripts": [
-          "scripts/user.sh",
           "scripts/base.sh",
+          "scripts/user.sh",
           "scripts/kiosk.sh",
           "scripts/autossh.sh",
           "scripts/cleanup.sh"
