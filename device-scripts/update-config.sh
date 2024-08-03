@@ -44,8 +44,8 @@ if [ "$ntp_server" == "public" ]; then
     ntp_server_addr=$public_compbox
 elif [ "$ntp_server" == "venue" ]; then
     ntp_server_addr=$compbox_ip
-elif [ "$ntp_server" == "ntporg" ]; then
-    ntp_server_addr="0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org"
+elif [ "$ntp_server" == "venue-fallback" ]; then
+    ntp_server_addr="$compbox_ip 0.pool.ntp.org 1.pool.ntp.org 2.pool.ntp.org 3.pool.ntp.org"
 fi
 
 sed 's/#FallbackNTP/FallbackNTP/' /etc/systemd/timesyncd.conf
