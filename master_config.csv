@@ -1,2 +1,2 @@
 device,hostname,url,autossh_port,ntp_server
-default,kiosk,"https://comp.roboticsoutreach.org/display/controlled?competitionId=82287fc2-f4ec-4eea-84d8-5bdde502a0e1",0,venue
+default,kiosk,"https://comp.roboticsoutreach.org/display/controlled?competitionId=82287fc2-f4ec-4eea-84d8-5bdde502a0e1",0,
