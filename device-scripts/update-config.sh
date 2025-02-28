@@ -44,6 +44,8 @@ if [ "$ntp_server" == "public" ]; then
     ntp_server_addr=$public_compbox
 elif [ "$ntp_server" == "venue" ]; then
     ntp_server_addr=$compbox_ip
+else
+    ntp_server_addr=""
 fi
 
 current_ntp_server=$(awk '/^NTP=/{print $2}' /etc/systemd/timesyncd.conf)
