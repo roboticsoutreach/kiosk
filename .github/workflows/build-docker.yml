@@ -36,7 +36,7 @@ jobs:
           echo "image_name=$(basename ${{ github.workspace }}/*.img.xz)" >> $GITHUB_ENV
 
       - name: Save image artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: kiosk-${{ env.git_desc }}
           path: ${{ env.image_path }}
