@@ -74,7 +74,7 @@ ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 
 # setup default kiosk config, the url must differ from any set urls to trigger a refresh
 cat > /home/pi/sb-kiosk.conf << EOF
-kiosk_args="--incognito --kiosk --enable-kiosk-mode --enabled"
+kiosk_args="--kiosk --enable-kiosk-mode --enabled"
 kiosk_url="file:///dev/null"
 EOF
 

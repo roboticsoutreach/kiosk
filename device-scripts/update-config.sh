@@ -90,7 +90,6 @@ if [ "$kiosk_url" == "$new_kiosk_url" ]; then
 else
     # calculate kiosk_args
     base_kiosk_args="
-        --incognito
         --kiosk
         --enable-kiosk-mode
         --enabled

@@ -1,5 +1,2 @@
 device,hostname,url,autossh_port,ntp_server
-default,kiosk,"file:///home/pi/mac.html",0,venue
-12:34:56:78:90:ab,corner1,"venue/arena.html?main,0",1234,venue
-12:34:56:78:90:ac,outside,"livestream",1235,public
-b8:27:eb:c1:bb:42,test-kiosk,"file:///home/pi/mac.html",0,venue
+default,kiosk,"https://comp.roboticsoutreach.org/display/controlled?competitionId=82287fc2-f4ec-4eea-84d8-5bdde502a0e1",0,venue
