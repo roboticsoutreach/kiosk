@@ -30,7 +30,7 @@ chmod +x $home_dir/show-procs
 echo 'export DISPLAY=:0' >> $home_dir/.bashrc
 
 # Clone the kiosk repository into the image to allow fetching config at boot
-git clone --branch "${KIOSK_BRANCH:-main}" https://github.com/sourcebots/sb-kiosk.git sb-kiosk
+git clone --branch "${KIOSK_BRANCH:-main}" https://github.com/roboticsoutreach/kiosk.git sb-kiosk
 
 chown 1000:1000 -R $home_dir/sb-kiosk
 
