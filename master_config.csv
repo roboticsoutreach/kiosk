@@ -1,3 +1,3 @@
 device,hostname,url,autossh_port,ntp_server
-default,kiosk,"https://comp.acolville.co.uk/display/controlled?competitionId=918bda99-b7e0-4a68-b84c-8c88353db37e",0,
+default,kiosk,"https://sro.bot/screen",0,
 
